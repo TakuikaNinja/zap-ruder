@@ -96,7 +96,8 @@ Kernel: xyon
 Most of the screen is filled with flat dither whose brightness and
 hue can be adjusted.  This test indicates both the horizontal and
 vertical position of the start of brightness, though the horizontal
-position is very noisy.
+position is very noisy.  The top arrow represents the most recent
+reading, and the bottom arrow represents the median of the last few.
 
 The intent of this experimental kernel was to estimate the horizontal
 position in 18-pixel units, but noise caused the actual detection
