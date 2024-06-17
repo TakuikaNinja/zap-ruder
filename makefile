@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 #
 # Makefile for Zapper tech demo for NES
-# Copyright 2011-2019 Damian Yerrick
+# Copyright 2011, 2014 Damian Yerrick
 #
 # Copying and distribution of this file, with or without
 # modification, are permitted in any medium without royalty
@@ -81,6 +81,9 @@ zip.in:
 	echo zip.in >> $@
 	echo $(title).nes >> $@
 	echo $(title).nsf >> $@
+
+clean:
+	$(RM) $(objdir)/*.o $(objdir)/*.s $(objdir)/*.chr
 
 $(objdir)/index.txt: makefile
 	echo Files produced by build tools go here, but caulk goes where? > $@
