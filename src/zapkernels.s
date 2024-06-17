@@ -19,7 +19,7 @@
 ;   NTSC 2-player (Y) kernel
 ;   NTSC (Yon, Yoff) kernel
 ;
-; Kernels for PAL NES with its 106 5/8 CPU cycles per scanline,
+; Kernels for PAL NES, with its 106 9/16 CPU cycles per scanline,
 ; are left as an exercise for the reader:
 ;   PAL single player (X, Y) kernel
 ;   PAL 2-player (Y) kernel
@@ -76,7 +76,8 @@ lineloop_on:
 .if ::DEBUG_SHOW_TIMING
   sta PPUMASK
 .else
-  bit $0100
+  nop
+  nop
 .endif
 
   ; 12.67
@@ -92,7 +93,7 @@ lineloop_on:
   dey
   bne lineloop_on
   .assert >* = >lineloop_on, error, "branch crosses page boundary"
-  jmp bail
+  rts
 
 ; Wait for photosensor to turn ON
 lineloop_off:
@@ -117,7 +118,8 @@ hit_on:
 .if ::DEBUG_SHOW_TIMING
   sta PPUMASK
 .else
-  bit $0100
+  nop
+  nop
 .endif
 
   ; 12.67
@@ -135,7 +137,6 @@ hit_on:
   .assert >* = >lineloop_off, error, "branch crosses page boundary"
 
 hit_off:
-bail:
 waste_12:
   rts
 .endproc
@@ -183,8 +184,10 @@ lineloop_on:
   jsr waste_12
   jsr waste_12
   jsr waste_12
-  bit $0100
-  bit $0100
+  nop
+  nop
+  nop
+  nop
 
   ; 12
 .if ::DEBUG_SHOW_TIMING
@@ -209,10 +212,8 @@ lineloop_on:
   dey
   bne lineloop_on
   .assert >* = >lineloop_on, error, "branch crosses page boundary"
-  jmp bail
 
 hit_off:
-bail:
 waste_12:
   rts
 .endproc
