@@ -1,3 +1,9 @@
+0.03f (2025-06-14)
+* Unofficial static FDS port by TakuikaNinja
+* Assemble NROM128 PRG to $8000
+* Clear RAM on reset
+* Shift stack variables to avoid conflicts with FDS BIOS
+
 0.03a (2019-04-15)
 * Rebuild with Python 3 and recent ca65
 * Move audio subroutine names into Pently namespace

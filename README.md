@@ -1,3 +1,17 @@
+# Zap Ruder FDS
+
+by TakuikaNinja
+
+This is Zap Ruder ported to the Famicom Disk System (FDS).
+This marks the first FDS program to support the Zapper, as
+no commercial disk game is known to support it.
+
+This port assembles the NES version and statically includes it into
+the assembled FDS disk image. Some modifications have been made to
+fix compatibility with the FDS and its BIOS - see `CHANGES.txt`.
+
+The original README contents will now follow.
+
 Zap Ruder
 =========
 
