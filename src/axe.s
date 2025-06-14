@@ -30,13 +30,13 @@ axe_xoffset_hi = ball_dxhi
 noteAccent = paddle_ylo
 explosion_y = paddle_yhi+1
 
-scroll_colbuf = $0100
-scroll_dsthi = $0118
-scroll_dstlo = $0119
+scroll_colbuf = $0100+$10
+scroll_dsthi = $0118+$10
+scroll_dstlo = $0119+$10
 
-new_dot_shape = $011D
-new_dot_dsthi = $011E
-new_dot_dstlo = $011F
+new_dot_shape = $011D+$10
+new_dot_dsthi = $011E+$10
+new_dot_dstlo = $011F+$10
 
 .segment "CODE"
 .align 128

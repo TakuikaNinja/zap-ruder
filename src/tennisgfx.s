@@ -16,8 +16,8 @@ NET_TILE_BASE = $BA
 PORTRAIT_TILE_BASE = $8C
 
 TIP_WIDTH = 12
-tipBuffer = $0100
-digitsBuffer = $0140
+tipBuffer = $0100+$10
+digitsBuffer = $0140+$10
 
 .proc tennis_title
 join_msg_to_draw = game_state

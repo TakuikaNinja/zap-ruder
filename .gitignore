@@ -6,10 +6,12 @@
 /zip.in
 *.nes.deb
 /map.txt
+/fdsmap.txt
 /nsfmap.txt
 __pycache__/
 *.pyc
 /ruder.nes
+/ruder.fds
 /ruder.nsf
 /ruder-*.zip
 

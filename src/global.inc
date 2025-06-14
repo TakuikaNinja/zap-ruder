@@ -14,6 +14,7 @@ OAM = $0200
 ; main.s methods
 .global draw_player_sprite, move_player
 .global draw_y_arrow_sprite, draw_x_arrow_sprite
+.global nmi, reset, irq
 
 ; pads.s methods
 .global read_pads

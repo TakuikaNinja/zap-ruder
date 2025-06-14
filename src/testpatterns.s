@@ -69,7 +69,7 @@ yonoff_backgrounds:
   jsr PKB_unpackblk
 
   lda #0
-  sta $100
+  sta $0100+$10
 
 loop:
   jsr basic_tests_next_frame
@@ -100,7 +100,7 @@ not_by_twos:
   ldx #12
 :
   lda yht_msg,x
-  sta $100,x
+  sta $0100+$10,x
   dex
   bpl :-
   lda 2
@@ -153,7 +153,7 @@ no_s0:
   jsr PKB_unpackblk
 
   lda #0
-  sta $100
+  sta $0100+$10
 
 loop:
   jsr basic_tests_next_frame
@@ -173,7 +173,7 @@ loop:
   ldx #13
 :
   lda y1y2_msg,x
-  sta $100,x
+  sta $0100+$10,x
   dex
   bpl :-
   lda 2
@@ -234,7 +234,7 @@ tmpx = 7
   jsr PKB_unpackblk
 
   lda #0
-  sta $100
+  sta $0100+$10
 
 loop:
   jsr basic_tests_next_frame
@@ -283,7 +283,7 @@ median_shift:
   ldx #13
 :
   lda xy_msg,x
-  sta $100,x
+  sta $0100+$10,x
   dex
   bpl :-
 
@@ -328,7 +328,7 @@ bail:
 .endproc
 
 .proc do_x_median
-median_temp = $0110
+median_temp = $0110+$10
   ldx #MEDIAN_SIZE-1
 medcopy:
   lda median_ring,x
@@ -385,7 +385,7 @@ medgnome_noswap:
   jsr PKB_unpackblk
 
   lda #0
-  sta $100
+  sta $0100+$10
 
 loop:
   jsr basic_tests_next_frame
@@ -447,7 +447,7 @@ not_by_twos_under_7:
   ldx #17
 :
   lda yhtr_msg,x
-  sta $100,x
+  sta $0100+$10,x
   dex
   bpl :-
   lda 2
@@ -503,16 +503,16 @@ xy_msg:   .byt "X=   Y=   ",0
   lsr a
   beq no_hundreds
   ora #'0'
-  sta $100,x
+  sta $0100+$10,x
 no_hundreds:
   lda 0
   and #$0F
   ora #'0'
-  sta $101,x
+  sta $0101+$10,x
 no_tens:
   pla
   ora #'0'
-  sta $102,x
+  sta $0102+$10,x
   rts
 .endproc
 
@@ -593,9 +593,9 @@ hue_not_10:
   sta PPUDATA
   
   ; write string at $2342
-  lda #<$100
+  lda #<$0100+$10
   sta 0
-  lda #>$100
+  lda #>$0100+$10
   sta 1
   lda #$23
   ldx #$42
@@ -606,7 +606,7 @@ hue_not_10:
   lda #0
   sta PPUSCROLL
   sta PPUSCROLL
-  sta $100
+  sta $0100+$10
   sta OAMADDR
   lda #>OAM
   sta OAM_DMA

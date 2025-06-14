@@ -131,6 +131,8 @@ palloop:
   sta P2          ; Disable APU Frame IRQ
   lda #$0F
   sta SNDCHN      ; Disable DMC playback, initialize other channels
+  lda #%00100110  ; bit 3 clear = horizontal arrangement ("vertical mirroring")
+  sta $4025       ; set FDS nametable arrangement (should be harmless on NROM)
 
 vwait1:
   bit PPUSTATUS   ; It takes one full frame for the PPU to become

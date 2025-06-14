@@ -21,6 +21,8 @@ objlist := zapkernels main ppuclear title menu testpatterns \
            pentlysound pentlymusic musicseq ntscPeriods \
            bcd math pads unpkb
 
+objlistfds := fdsdisk
+
 objlistnsf := nsfshell pentlysound pentlymusic musicseq ntscPeriods
 
 AS65 := ca65
@@ -68,7 +70,7 @@ run: $(title).nes
 # changes to the ROM, makefile, and README as a heuristic for when
 # something was changed.  Limitation: it won't see changes to docs or
 # tools unless there is a corresponding makefile change.
-all: $(title).nes $(title).nsf
+all: $(title).nes $(title).fds $(title).nsf
 dist: zip
 zip: $(title)-$(version).zip
 $(title)-$(version).zip: zip.in $(title).nes $(title).nsf \
@@ -80,10 +82,11 @@ zip.in:
 	git ls-files | grep -e "^[^.]" > $@
 	echo zip.in >> $@
 	echo $(title).nes >> $@
+	echo $(title).fds >> $@
 	echo $(title).nsf >> $@
 
 clean:
-	$(RM) $(objdir)/*.o $(objdir)/*.s $(objdir)/*.chr
+	$(RM) $(objdir)/*.o $(objdir)/*.s $(objdir)/*.chr *.nes *.fds *.nsf
 
 $(objdir)/index.txt: makefile
 	echo Files produced by build tools go here, but caulk goes where? > $@
@@ -91,10 +94,14 @@ $(objdir)/index.txt: makefile
 # Rules for PRG ROM
 
 objlistntsc := $(foreach o,$(objlist),$(objdir)/$(o).o)
+objlistfds := $(foreach o,$(objlistfds),$(objdir)/$(o).o)
 objlistnsf := $(foreach o,$(objlistnsf),$(objdir)/$(o).o)
 
 map.txt $(title).nes: nrom128.cfg $(objlistntsc)
 	$(LD65) -C $^ -m map.txt -o $(title).nes
+
+fdsmap.txt $(title).fds: fds.cfg $(objlistfds)
+	$(LD65) -C $^ -m fdsmap.txt -o $(title).fds
 
 nsfmap.txt $(title).nsf: nsf.cfg $(objlistnsf)
 	$(LD65) -C $^ -m nsfmap.txt -o $(title).nsf
@@ -107,6 +114,7 @@ $(objdir)/%.o: $(objdir)/%.s
 
 # Files that depend on .incbin'd files or on other headers
 $(objdir)/main.o: $(objdir)/bggfx.chr $(objdir)/spritegfx.chr
+$(objdir)/fdsdisk.o: $(objdir)/bggfx.chr $(objdir)/spritegfx.chr
 
 $(objdir)/testpatterns.o: $(srcdir)/ballbg.pkb $(srcdir)/fullbright.pkb \
     $(srcdir)/hlines.pkb $(srcdir)/menu.pkb $(srcdir)/vlines.pkb \
